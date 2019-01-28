@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FA469914-A689-44E4-AB22-9E108617A3B8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleApp7</RootNamespace>
-    <AssemblyName>ConsoleApp7</AssemblyName>
+    <RootNamespace>SVGPathExplain</RootNamespace>
+    <AssemblyName>SVGPathExplain</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SVGPathExplain.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,7 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandProcess\ClosePath.cs" />
-    <Compile Include="CommandProcess\CmdProcess.cs" />
+    <Compile Include="CommandProcess\_ICommandProcessor.cs" />
+    <Compile Include="CommandProcess\Command.cs" />
     <Compile Include="CommandProcess\CurveTo.cs" />
     <Compile Include="CommandProcess\EllipticalArc.cs" />
     <Compile Include="CommandProcess\HorizontalLineTo.cs" />
@@ -51,7 +55,7 @@
     <Compile Include="CommandProcess\QuadraticBezierCurve.cs" />
     <Compile Include="CommandProcess\SmoothCurveTo.cs" />
     <Compile Include="CommandProcess\SmoothQuadraticBezierCurveTo.cs" />
-    <Compile Include="CommandProcess\SvgPathCommand.cs" />
+    <Compile Include="SvgPathCommand.cs" />
     <Compile Include="CommandProcess\VerticalLineTo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ConsoleApp7.CommandProcess
+namespace SVGPathExplain.CommandProcess
 {
-    public class VerticalLineTo : CmdProcess
-    {
-        public VerticalLineTo(bool relativePosition) : base(relativePosition)
+    public class VerticalLineTo : _ICommandProcessor
+    {       
+        public void Process(Command c)
         {
-        }
-
-        public override void Process(List<string> tokenize, ref int index)
-        {
-            float y = float.Parse(tokenize[++index]);
-            Console.WriteLine(
-                "Draw vertical line to {0} {1}px {2}",
-                y < 0 ? " the top " : " the bottom ",
-                Math.Abs(y),
-                this.absolutePosition ? "" : "relative.");
+            Console.Write(c.CommandText.ToUpper() == c.CommandText ? "[abs]" : "[rel]");
+            Console.WriteLine(" VerticalLineTo: " + c.Paramenters[0]);
         }
     }
 }

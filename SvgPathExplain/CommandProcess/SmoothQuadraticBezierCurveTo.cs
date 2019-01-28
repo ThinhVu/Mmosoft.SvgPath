@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConsoleApp7.CommandProcess
+namespace SVGPathExplain.CommandProcess
 {
-    public class SmoothQuadraticBezierCurveTo : CmdProcess
+    public class SmoothQuadraticBezierCurveTo : _ICommandProcessor
     {
-        public SmoothQuadraticBezierCurveTo(bool relativePosition) : base(relativePosition)
+        public void Process(Command c)
         {
-        }
+            if (c.Paramenters.Count % 2 != 0)
+                throw new ArgumentException("Missing parameters");
+           
+            var points = new List<string>();
+            for (int i = 0; i < c.Paramenters.Count; i += 2)
+                points.Add(string.Format("[(x: {0} y: {1})]", c.Paramenters[i], c.Paramenters[i + 1]));
 
-        public override void Process(List<string> tokenize, ref int index)
-        {
-            throw new NotImplementedException();
+            Console.Write(c.CommandText.ToUpper() == c.CommandText ? "[abs]" : "[rel]");
+            Console.WriteLine(" SmoothQuadraticBezierCurveTo: " + string.Join(", ", points.ToArray()));            
         }
     }
 }

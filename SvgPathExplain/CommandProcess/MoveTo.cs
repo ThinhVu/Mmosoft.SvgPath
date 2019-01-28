@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConsoleApp7.CommandProcess
+namespace SVGPathExplain.CommandProcess
 {
-    public class MoveTo : CmdProcess
+    public class MoveTo : _ICommandProcessor
     {
-        public MoveTo(bool absPos) : base(absPos)
+        public void Process(Command c)
         {
-        }
+            var points = new List<string>();
 
-        public override void Process(List<string> tokenize, ref int index)
-        {
-            string x = tokenize[++index];
-            string y = tokenize[++index];
-
-            Console.WriteLine("Move to position ({0}, {1}) {2}", x, y, this.absolutePosition ? "" : "relative.");
+            for(int i=0; i<c.Paramenters.Count; i+=2)
+                points.Add(string.Format("({0}, {1})", c.Paramenters[i], c.Paramenters[i + 1]));
+            
+            Console.Write(c.CommandText.ToUpper() == c.CommandText ? "[abs]" : "[rel]");
+            Console.WriteLine(" MoveTo: " + string.Join(", ", points.ToArray()));
         }
     }
 }

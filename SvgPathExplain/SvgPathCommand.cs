@@ -1,54 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SVGPathExplain.CommandProcess;
 
-namespace ConsoleApp7.CommandProcess
+namespace SVGPathExplain
 {
     // ref: https://www.w3.org/TR/SVG/paths.html#PathDataLinetoCommands
     // ref: https://useiconic.com/open/
     // ref: https://github.com/iconic/open-iconic
     public class SvgPathCommand
     {
+        private static Dictionary<string, _ICommandProcessor> commandProcessors = new Dictionary<string, _ICommandProcessor>
+        {
+            // moveto
+            { "M", new MoveTo() },
+            { "m", new MoveTo() },
+            // lineto
+            { "L", new LineTo() },
+            { "l", new LineTo() },
+            //  horizontal lineto
+            { "H", new HorizontalLineTo() },
+            { "h", new HorizontalLineTo() },
+            // vertical lineto
+            { "V", new VerticalLineTo() },
+            { "v", new VerticalLineTo() },
+            // curveto
+            { "C", new CurveTo() },
+            { "c", new CurveTo() },
+            // smooth curveto
+            { "S", new SmoothCurveTo() },
+            { "s", new SmoothCurveTo() },
+            // quadratic Bézier curve
+            { "Q", new QuadraticBezierCurve() },
+            { "q", new QuadraticBezierCurve() },
+            // smooth quadratic Bézier curveto
+            { "T", new SmoothQuadraticBezierCurveTo() },
+            { "t", new SmoothQuadraticBezierCurveTo() },
+            // elliptical Arc
+            { "A", new EllipticalArc() },
+            { "a", new EllipticalArc() },
+            // closepath
+            { "Z", new ClosePath() },
+            { "z", new ClosePath() },
+        };
+
         public void Explain(string name, string path)
         {
-            Console.WriteLine("Draw " + name);
-            var token = PathTokenize(path);
-            Execute(token);
+            Console.WriteLine("----- Draw " + name);            
+            this.Execute(BuildCommands(PathTokenize(path)));
         }
 
-        private void Execute(List<string> tokenize)
+        private List<Command> BuildCommands(List<string> tokenizedPath)
         {
-            var cmds = new Dictionary<string, CmdProcess>
-                {
-                    // moveto
-                    { "M", new MoveTo(true) }, { "m", new MoveTo(false) },
-                    // lineto
-                    { "L", new LineTo(true) }, { "l", new LineTo(false) },
-                    //  horizontal lineto
-                    { "H", new HorizontalLineTo(true) }, { "h", new HorizontalLineTo(false) },
-                    // vertical lineto
-                    { "V", new VerticalLineTo(true) }, { "v", new VerticalLineTo(false) },
-                    // curveto
-                    { "C", new CurveTo(true) }, { "c", new CurveTo(false) },
-                    // smooth curveto
-                    { "S", new SmoothCurveTo(true) }, { "s", new SmoothCurveTo(false) },
-                    // quadratic Bézier curve
-                    { "Q", new QuadraticBezierCurve(true) }, { "q", new QuadraticBezierCurve(false) },
-                    // smooth quadratic Bézier curveto
-                    { "T", new SmoothQuadraticBezierCurveTo(true) }, { "t", new SmoothQuadraticBezierCurveTo(false) },
-                    // elliptical Arc
-                    { "A", new EllipticalArc(true) },{ "a", new EllipticalArc(false) },
-                    // closepath
-                    { "Z", new ClosePath(true) }, { "z", new ClosePath(false) },
-                };
-
-            int i = 0;
-            while (i < tokenize.Count)
+            List<Command> commands = new List<Command>();
+            Command command = null;
+            for (int i = 0, c = tokenizedPath.Count; i < c; i++)
             {
-                cmds[tokenize[i]].Process(tokenize, ref i);
-                i++; // next cmd
+                if (tokenizedPath[i].Length == 1 && !char.IsDigit(tokenizedPath[i][0]))
+                {
+                    if (command != null)
+                        commands.Add(command);
+
+                    command = new Command(tokenizedPath[i]);
+                }
+                else
+                {
+                    command.Paramenters.Add(tokenizedPath[i]);
+                }
+            }
+
+            // last close path
+            if (command != null)
+                commands.Add(command);
+
+            return commands;
+        }
+
+        private void Execute(List<Command> commands)
+        {
+            Command c;
+            for (int i = 0, cmdCount = commands.Count; i < cmdCount; i++)
+            {
+                c = commands[i];
+                commandProcessors[c.CommandText].Process(c);
             }
         }
+
 
         private List<string> PathTokenize(string path)
         {

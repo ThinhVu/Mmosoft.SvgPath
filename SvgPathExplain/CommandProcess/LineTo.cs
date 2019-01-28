@@ -1,49 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConsoleApp7.CommandProcess
+namespace SVGPathExplain.CommandProcess
 {
-    public class LineTo : CmdProcess
-    {
-        public LineTo(bool relativePosition) : base(relativePosition)
+    public class LineTo : _ICommandProcessor
+    {        
+        public void Process(Command c)
         {
-        }
-
-        public override void Process(List<string> tokenize, ref int index)
-        {
-            index++; // skip command
-            var nums = new List<string>();
-            string temp;
-            while (index < tokenize.Count)
-            {
-                temp = tokenize[index];
-                if (temp.Length == 1 && !char.IsDigit(temp[0]))
-                {
-                    // only have 1 char and first char is not digit => next command
-                    index--;
-                    break;
-                }
-                else
-                {
-                    nums.Add(temp);
-                    index++;
-                }
-            }
-
-            // build point
-            if (nums.Count % 2 != 0)
+            if (c.Paramenters.Count % 2 != 0)
                 throw new Exception("Argument missing!");
 
             var points = new List<string>();
-            for (int i = 0; i < nums.Count; i += 2)
-            {
-                points.Add("(" + nums[i] + " " + nums[i + 1] + ")");
-            }
+            for (int i = 0; i < c.Paramenters.Count; i += 2)
+                points.Add(string.Format("({0}, {1})", c.Paramenters[i], c.Paramenters[i + 1]));
 
-            Console.WriteLine(
-                "Line to position {0} {1}",
-                string.Join(", then to ", points.ToArray()),
-                this.absolutePosition ? "" : "relative.");
+            Console.Write(c.CommandText.ToUpper() == c.CommandText? "[abs]" : "[rel]");
+            Console.WriteLine(" LineTo: " + string.Join(", ", points.ToArray()));
         }
     }
 }

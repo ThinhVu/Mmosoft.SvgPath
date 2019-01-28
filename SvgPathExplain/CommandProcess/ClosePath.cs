@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ConsoleApp7.CommandProcess
+namespace SVGPathExplain.CommandProcess
 {
-    public class ClosePath : CmdProcess
-    {
-        public ClosePath(bool relativePosition) : base(relativePosition)
-        {
-        }
-
-        public override void Process(List<string> tokenize, ref int index)
-        {
-            Console.WriteLine("Close path!");
+    public class ClosePath : _ICommandProcessor
+    {        
+        public void Process(Command c)
+        {            
+            Console.Write(c.CommandText.ToUpper() == c.CommandText ? "[abs]" : "[rel]");
+            Console.WriteLine(" ClosePath");
         }
     }
 }

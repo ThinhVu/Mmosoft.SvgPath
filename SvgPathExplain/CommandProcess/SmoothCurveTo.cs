@@ -1,49 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConsoleApp7.CommandProcess
+namespace SVGPathExplain.CommandProcess
 {
-    public class SmoothCurveTo : CmdProcess
-    {
-        public SmoothCurveTo(bool relativePosition) : base(relativePosition)
+    public class SmoothCurveTo : _ICommandProcessor
+    {        
+        public void Process(Command c)
         {
-        }
-
-        public override void Process(List<string> tokenize, ref int index)
-        {
-            index++; // skip command
-            var nums = new List<string>();
-            string temp;
-            while (index < tokenize.Count)
-            {
-                temp = tokenize[index];
-                if (temp.Length == 1 && !char.IsDigit(temp[0]))
-                {
-                    // only have 1 char and first char is not digit => next command
-                    index--;
-                    break;
-                }
-                else
-                {
-                    nums.Add(temp);
-                    index++;
-                }
-            }
-
             // build point
-            if (nums.Count % 2 != 0)
+            if (c.Paramenters.Count % 4 != 0)
                 throw new Exception("Argument missing!");
 
             var points = new List<string>();
-            for (int i = 0; i < nums.Count; i += 2)
-            {
-                points.Add("(" + nums[i] + " " + nums[i + 1] + ")");
-            }
+            for (int i = 0; i < c.Paramenters.Count; i += 4)
+                points.Add(string.Format("[({0}, {1}) ({2}, {3})]", c.Paramenters[i], c.Paramenters[i+1], c.Paramenters[i+2], c.Paramenters[i+3]));
 
-            Console.WriteLine(
-                "Draw smooth curve to {0} {1}",
-                string.Join(", then ", points.ToArray()),
-                this.absolutePosition ? "" : "relatively");
+            Console.Write(c.CommandText.ToUpper() == c.CommandText ? "[abs]" : "[rel]");
+            Console.WriteLine(" SmoothCurveTo: " + string.Join(", ", points.ToArray()));            
         }
     }
 }
