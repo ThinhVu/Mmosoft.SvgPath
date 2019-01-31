@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,7 +47,7 @@
   <ItemGroup>
     <Compile Include="CommandProcess\ClosePath.cs" />
     <Compile Include="CommandProcess\_ICommandProcessor.cs" />
-    <Compile Include="CommandProcess\Command.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="CommandProcess\CurveTo.cs" />
     <Compile Include="CommandProcess\EllipticalArc.cs" />
     <Compile Include="CommandProcess\HorizontalLineTo.cs" />

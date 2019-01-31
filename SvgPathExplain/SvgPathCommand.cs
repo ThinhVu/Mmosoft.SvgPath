@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using SVGPathExplain.CommandProcess;
 
@@ -44,10 +46,19 @@ namespace SVGPathExplain
             { "z", new ClosePath() },
         };
 
-        public void Explain(string name, string path)
+        private int ratio;
+
+        public SvgPathCommand()
         {
-            Console.WriteLine("----- Draw " + name);            
-            this.Execute(BuildCommands(PathTokenize(path)));
+            ratio = 10;
+        }
+
+        public Bitmap Explain(string path, int width, int height)
+        {
+            var tokenized = PathTokenize(path);
+            var rawCommands = BuildCommands(tokenized);
+            var cmds = PreprocessCommands(rawCommands);
+            return this.Execute(cmds, width, height);
         }
 
         private List<Command> BuildCommands(List<string> tokenizedPath)
@@ -65,7 +76,7 @@ namespace SVGPathExplain
                 }
                 else
                 {
-                    command.Paramenters.Add(tokenizedPath[i]);
+                    command.Params.Add(float.Parse(tokenizedPath[i]) * ratio);
                 }
             }
 
@@ -76,16 +87,35 @@ namespace SVGPathExplain
             return commands;
         }
 
-        private void Execute(List<Command> commands)
-        {
+        private Bitmap Execute(List<Command> commands, int width, int height)
+        {            
+            Bitmap b = new Bitmap((width + 1) * ratio, (height + 1) * ratio);
+            Graphics g = Graphics.FromImage(b);
+            GraphicsPath gp = new GraphicsPath();
+            
+            float x = 0;
+            float y = 0;
             Command c;
             for (int i = 0, cmdCount = commands.Count; i < cmdCount; i++)
             {
                 c = commands[i];
-                commandProcessors[c.CommandText].Process(c);
+                commandProcessors[c.CommandText].Process(c, gp, ref x, ref y);
             }
+
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.FillPath(Brushes.Black, gp);
+            gp.Dispose();
+            g.Dispose();
+            return b;
         }
 
+        private List<Command> PreprocessCommands(List<Command> cmds)
+        {
+            for (int i = 1; i < cmds.Count; ++i)
+                cmds[i].PrevCmd = cmds[i - 1];
+
+            return cmds;
+        }        
 
         private List<string> PathTokenize(string path)
         {
@@ -150,6 +180,9 @@ namespace SVGPathExplain
                     i++;
                 }
             }
+
+            if (number.Length != 0)
+                tokenize.Add(number.ToString());
 
             return tokenize;
         }

@@ -1,13 +1,12 @@
-﻿using System;
+﻿using System.Drawing.Drawing2D;
 
 namespace SVGPathExplain.CommandProcess
 {
     public class ClosePath : _ICommandProcessor
-    {        
-        public void Process(Command c)
-        {            
-            Console.Write(c.CommandText.ToUpper() == c.CommandText ? "[abs]" : "[rel]");
-            Console.WriteLine(" ClosePath");
+    {     
+        public void Process(Command command, GraphicsPath g, ref float x, ref float y)
+        {
+            g.CloseFigure();
         }
     }
 }

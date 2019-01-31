@@ -1,21 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace SVGPathExplain.CommandProcess
 {
     public class LineTo : _ICommandProcessor
-    {        
-        public void Process(Command c)
+    {
+        public void Process(Command c, GraphicsPath g, ref float x, ref float y)
         {
-            if (c.Paramenters.Count % 2 != 0)
+            if (c.Params.Count % 2 != 0)
                 throw new Exception("Argument missing!");
 
-            var points = new List<string>();
-            for (int i = 0; i < c.Paramenters.Count; i += 2)
-                points.Add(string.Format("({0}, {1})", c.Paramenters[i], c.Paramenters[i + 1]));
+            bool isAbsolute = c.CommandText.ToUpper() == c.CommandText;
 
-            Console.Write(c.CommandText.ToUpper() == c.CommandText? "[abs]" : "[rel]");
-            Console.WriteLine(" LineTo: " + string.Join(", ", points.ToArray()));
+            for (int i = 0; i < c.Params.Count; i += 2)
+            {
+                float xParam = c.Params[i];
+                float yParam = c.Params[i + 1];
+                g.AddLine(new PointF(x, y), new PointF(x + xParam, y + yParam));
+
+                if (isAbsolute)
+                {
+                    x = xParam;
+                    y = yParam;
+                }
+                else
+                {
+                    x += xParam;
+                    y += yParam;
+                }
+            }
         }
     }
 }

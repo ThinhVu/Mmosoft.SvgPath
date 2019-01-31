@@ -1,22 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace SVGPathExplain.CommandProcess
 {
     public class QuadraticBezierCurve : _ICommandProcessor
-    {        
-        public void Process(Command c)
+    {
+        // (x1 y1 x y)+
+        // Draws a quadratic Bézier curve from the current point to (x,y) using (x1,y1) as the control point. 
+        // Q (uppercase) indicates that absolute coordinates will follow; q (lowercase) indicates that relative 
+        // coordinates will follow. Multiple sets of coordinates may be specified to draw a polybézier. 
+        // At the end of the command, the new current point becomes the final (x,y) coordinate pair used in the polybézier.
+        public void Process(Command c, GraphicsPath g, ref float x, ref float y)
         {
-            if (c.Paramenters.Count % 4 != 0)
-                throw new ArgumentException("Missing parameters");
-            
-            var points = new List<string>();
-         
-            for (int i = 0; i < c.Paramenters.Count; i += 4)
-                points.Add(string.Format("[(x1: {0} y1: {1} x: {2} y: {3})]", c.Paramenters[i], c.Paramenters[i + 1], c.Paramenters[i + 2], c.Paramenters[i + 3]));
+            if (c.Params.Count % 4 != 0)
+                throw new ArgumentException("Missing parameters");            
 
-            Console.Write(c.CommandText.ToUpper() == c.CommandText ? "[abs]" : "[rel]");
-            Console.WriteLine(" QuadraticBezierCurve: " + string.Join(", ", points.ToArray()));            
-        }        
+            bool isAbs = c.CommandText.ToUpper() == c.CommandText;
+            for (int i = 0; i < c.Params.Count; i += 4)
+            {
+                var controlPoint1 = new PointF((isAbs ? 0 : x) + c.Params[i], (isAbs ? 0 : y) + c.Params[i + 1]);
+                var endPoint = new PointF((isAbs ? 0 : x) + c.Params[i + 2], (isAbs ? 0 : y) + c.Params[i + 3]);
+
+                g.AddBezier(new PointF(x, y), controlPoint1, controlPoint1, endPoint);
+
+                x = endPoint.X;
+                y = endPoint.Y;
+            }
+        }
     }
 }
