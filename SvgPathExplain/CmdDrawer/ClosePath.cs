@@ -2,9 +2,9 @@
 
 namespace SVGPathExplain.CommandProcess
 {
-    public class ClosePath : _ICommandProcessor
+    public class ClosePath : ICmdDrawer
     {     
-        public void Process(Command command, GraphicsPath g, ref float x, ref float y)
+        public void Process(Cmd command, GraphicsPath g)
         {
             g.CloseFigure();
         }

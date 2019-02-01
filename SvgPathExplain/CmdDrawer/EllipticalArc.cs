@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 
 namespace SVGPathExplain.CommandProcess
 {
-    public class EllipticalArc : _ICommandProcessor
+    public class EllipticalArc : ICmdDrawer
     {       
         //public void Process(Command c)
         //{
@@ -20,7 +20,7 @@ namespace SVGPathExplain.CommandProcess
         //    Console.WriteLine(" EllipticalArc: " + string.Join(", ", points.ToArray()));            
         //}
 
-        public void Process(Command command, GraphicsPath g, ref float x, ref float y)
+        public void Process(Cmd command, GraphicsPath g, ref float x, ref float y)
         {
             throw new NotImplementedException();
         }

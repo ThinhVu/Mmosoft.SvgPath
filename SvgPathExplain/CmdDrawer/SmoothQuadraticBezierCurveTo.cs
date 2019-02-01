@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 
 namespace SVGPathExplain.CommandProcess
 {
-    public class SmoothQuadraticBezierCurveTo : _ICommandProcessor
+    public class SmoothQuadraticBezierCurveTo : ICmdDrawer
     {
         //public void Process(Command c)
         //{
@@ -19,14 +19,14 @@ namespace SVGPathExplain.CommandProcess
         //    Console.Write(c.CommandText.ToUpper() == c.CommandText ? "[abs]" : "[rel]");
         //    Console.WriteLine(" SmoothQuadraticBezierCurveTo: " + string.Join(", ", points.ToArray()));            
         //}
-        public void Process(Command c, GraphicsPath g, ref float x, ref float y)
+        public void Process(Cmd c, GraphicsPath g, ref float x, ref float y)
         {
             if (c.Params.Count % 4 != 0)
                 throw new ArgumentException("Missing parameters");
 
             PointF controlPoint = GetControlPoint1(c, currentPoint: new PointF(x, y));
 
-            bool isAbs = c.CommandText.ToUpper() == c.CommandText;
+            bool isAbs = c.CmdText.ToUpper() == c.CmdText;
             for (int i = 0; i < c.Params.Count; i += 2)
             {                
                 var endPoint = new PointF((isAbs ? 0 : x) + c.Params[i], (isAbs ? 0 : y) + c.Params[i + 1]);
@@ -38,22 +38,22 @@ namespace SVGPathExplain.CommandProcess
             }
         }
 
-        private PointF GetControlPoint1(Command c, PointF currentPoint)
+        private PointF GetControlPoint1(Cmd c, PointF currentPoint)
         {
             PointF currentControlPoint1 = new PointF(0, 0);
 
             // if current is T or t and there is no Q, q, T, t
             // assume the first control point is coincident with the current point
-            if (c.CommandText == "T" || c.CommandText == "t")
+            if (c.CmdText == "T" || c.CmdText == "t")
             {
                 if (c.PrevCmd == null)
                 {
                     currentControlPoint1 = currentPoint;
                 }
-                else if (c.PrevCmd.CommandText != "Q"
-                    && c.PrevCmd.CommandText != "q"
-                    && c.PrevCmd.CommandText != "T"
-                    && c.PrevCmd.CommandText != "t")
+                else if (c.PrevCmd.CmdText != "Q"
+                    && c.PrevCmd.CmdText != "q"
+                    && c.PrevCmd.CmdText != "T"
+                    && c.PrevCmd.CmdText != "t")
                 {
                     currentControlPoint1 = currentPoint;
                 }
@@ -61,7 +61,7 @@ namespace SVGPathExplain.CommandProcess
                 {
                     PointF prevSecondControlAbsPosition = new PointF(0, 0);
                     // otherwise, trying to get the last second control point of previous
-                    string prevCmdText = c.PrevCmd.CommandText;
+                    string prevCmdText = c.PrevCmd.CmdText;
                     if (prevCmdText == "Q")
                     {
                         // ((x1 y1) (x y))+

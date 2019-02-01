@@ -4,13 +4,13 @@ using System.Drawing.Drawing2D;
 
 namespace SVGPathExplain.CommandProcess
 {
-    public class HorizontalLineTo : _ICommandProcessor
+    public class HorizontalLineTo : ICmdDrawer
     {
-        public void Process(Command c, GraphicsPath g, ref float x, ref float y)
+        public void Process(Cmd c, GraphicsPath g, ref float x, ref float y)
         {
             float xParam = c.Params[0];
             // H
-            if (c.CommandText.ToUpper() == c.CommandText)
+            if (c.CmdText.ToUpper() == c.CmdText)
             {
                 g.AddLine(new PointF(x, y), new PointF(xParam, y));
                 x = xParam;

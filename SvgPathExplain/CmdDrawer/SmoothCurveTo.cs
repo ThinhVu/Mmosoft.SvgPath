@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 
 namespace SVGPathExplain.CommandProcess
 {
-    public class SmoothCurveTo : _ICommandProcessor
+    public class SmoothCurveTo : ICmdDrawer
     {
         // (x2 y2 x y)+
 
@@ -20,9 +20,9 @@ namespace SVGPathExplain.CommandProcess
         // Multiple sets of coordinates may be specified to draw a polybézier.
         // At the end of the command, the new current point becomes the final (x,y) 
         // coordinate pair used in the polybézier.
-        public void Process(Command c, GraphicsPath g, ref float x, ref float y)
+        public void Process(Cmd c, GraphicsPath g, ref float x, ref float y)
         {
-            bool isAbs = c.CommandText.ToUpper() == c.CommandText;
+            bool isAbs = c.CmdText.ToUpper() == c.CmdText;
 
             PointF controlPoint1 = GetControlPoint1(c, currentPoint: new PointF(x, y));
 
@@ -38,22 +38,22 @@ namespace SVGPathExplain.CommandProcess
             }
         }
 
-        private PointF GetControlPoint1(Command c, PointF currentPoint)
+        private PointF GetControlPoint1(Cmd c, PointF currentPoint)
         {
             PointF currentControlPoint1 = new PointF(0, 0);
 
             // if current is S or s and there is no C, c, S, s
             // assume the first control point is coincident with the current point
-            if (c.CommandText == "S" || c.CommandText == "s")
+            if (c.CmdText == "S" || c.CmdText == "s")
             {
                 if (c.PrevCmd == null)
                 {
                     currentControlPoint1 = currentPoint;
                 }
-                else if (c.PrevCmd.CommandText != "C"
-                    && c.PrevCmd.CommandText != "c"
-                    && c.PrevCmd.CommandText != "S"
-                    && c.PrevCmd.CommandText != "s")
+                else if (c.PrevCmd.CmdText != "C"
+                    && c.PrevCmd.CmdText != "c"
+                    && c.PrevCmd.CmdText != "S"
+                    && c.PrevCmd.CmdText != "s")
                 {
                     currentControlPoint1 = currentPoint;
                 }
@@ -61,7 +61,7 @@ namespace SVGPathExplain.CommandProcess
                 {
                     PointF prevSecondControlAbsPosition = new PointF(0, 0);
                     // otherwise, trying to get the last second control point of previous
-                    string prevCmdText = c.PrevCmd.CommandText;
+                    string prevCmdText = c.PrevCmd.CmdText;
                     if (prevCmdText == "C")
                     {
                         // ((x1 y1) (x2 y2) (x y))+

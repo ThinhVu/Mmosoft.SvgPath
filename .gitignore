@@ -1,2 +1,7 @@
 **/obj/**
 **/bin/**
+/.vs/SvgPathExplain/v15/.suo
+/.vs/SvgPathExplain/v15/Server/sqlite3/db.lock
+/.vs/SvgPathExplain/v15/Server/sqlite3/storage.ide
+/.vs/SvgPathExplain/v15/Server/sqlite3/storage.ide-shm
+/.vs/SvgPathExplain/v15/Server/sqlite3/storage.ide-wal
