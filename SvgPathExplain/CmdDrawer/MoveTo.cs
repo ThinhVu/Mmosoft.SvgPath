@@ -11,20 +11,9 @@ namespace SVGPathExplain.CommandProcess
         // will follow. If a moveto is followed by multiple pairs of coordinates, the subsequent
         // pairs are treated as implicit lineto commands. Hence, implicit lineto commands will
         // be relative if the moveto is relative, and absolute if the moveto is absolute.
-        public void Process(Cmd c, GraphicsPath g, ref float x, ref float y)
+        public void Process(Cmd command, GraphicsPath g)
         {
-            // M
-            if (c.CmdText.ToUpper() == c.CmdText)
-            {
-                x = c.Params[0];
-                y = c.Params[1];
-            }
-            // m
-            else
-            {
-                x += c.Params[0];
-                y += c.Params[1];
-            }            
+            // already processed in Converter
         }
     }
 }

@@ -5,21 +5,9 @@ namespace SVGPathExplain.CommandProcess
 {
     public class VerticalLineTo : ICmdDrawer
     {
-        public void Process(Cmd c, GraphicsPath g, ref float x, ref float y)
+        public void Process(Cmd c, GraphicsPath g)
         {
-            float yParam = c.Params[0];
-            // H
-            if (c.CmdText.ToUpper() == c.CmdText)
-            {
-                g.AddLine(new PointF(x, y), new PointF(x, yParam));
-                y = yParam;
-            }
-            // h
-            else
-            {
-                g.AddLine(new PointF(x, y), new PointF(x, y + yParam));
-                y += yParam;
-            }
+            g.AddLine(new PointF(c.X, c.Y), new PointF(c.X, c.Params[0]));
         }
     }
 }

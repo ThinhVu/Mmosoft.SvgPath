@@ -24,8 +24,7 @@ namespace SVGPathExplain.CmdConverter
             for (int i = 0, cmdCount = cmds.Count; i < cmdCount; i++)
             {
                 curCmd = cmds[i];
-                prevCmd = i > 0 ? cmds[i - 1] : null;
-
+                prevCmd = absCommands.Count > 0? absCommands[absCommands.Count - 1] : null;
                 PathValidator.Validate(cmds[i]);
                 absCommands.AddRange(CmdConveterFactory.Create(curCmd.CmdText).Convert(curCmd, prevCmd, ref absX, ref absY));                
             }
@@ -45,7 +44,12 @@ namespace SVGPathExplain.CmdConverter
             Cmd cmd;
             for (int i = 0, cmdCount = commands.Count; i < cmdCount; i++)
             {
-                cmd = new Cmd { CmdText = commands[i].CmdText };
+                cmd = new Cmd
+                {
+                    CmdText = commands[i].CmdText,
+                    X = commands[i].X * ratio,
+                    Y = commands[i].Y * ratio
+                };
                 cmd.Params.AddRange(commands[i].Params);
 
                 for (int j = 0, cmdParamCount = cmd.Params.Count; j < cmdParamCount; j++)

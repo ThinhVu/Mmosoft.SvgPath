@@ -104,7 +104,8 @@ namespace SVGPathExplain
                     command.Params.Add(float.Parse(tokens[i]));
                 }
             }
-            
+
+            commands.Reverse();
             return commands;
         }
     }

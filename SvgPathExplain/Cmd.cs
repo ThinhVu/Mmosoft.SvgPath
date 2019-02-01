@@ -11,6 +11,10 @@ namespace SVGPathExplain
             "m", "l", "h", "v", "c", "s", "q", "t", "a", "z"
         };
 
+        public float X;
+        public float Y;
+
+        public Cmd PrevCmd;
         public string CmdText { get; set; }
         public List<float> Params { get; set; }
 
@@ -18,6 +22,11 @@ namespace SVGPathExplain
         {
             this.CmdText = "";
             this.Params = new List<float>();
+        }
+
+        public override string ToString()
+        {
+            return $"Cmd: {CmdText} Pos:({X}, {Y}) Params: {string.Join(", ", Params.ToArray())}";
         }
     }
 }

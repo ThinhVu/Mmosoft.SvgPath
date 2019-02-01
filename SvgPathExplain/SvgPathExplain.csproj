@@ -53,6 +53,7 @@
     <Compile Include="CmdConverter\AbsoluteSmoothCurveToCmdConverter.cs" />
     <Compile Include="CmdConverter\AbsoluteSmoothQuadraticBezierCurveToCmdConverter.cs" />
     <Compile Include="CmdConverter\AbsoluteVerticalLineToCmdConverter.cs" />
+    <Compile Include="CmdConverter\ClosePathCmdConverter.cs" />
     <Compile Include="CmdConverter\CmdConveterFactory.cs" />
     <Compile Include="CmdConverter\ICmdConverter.cs" />
     <Compile Include="CmdConverter\AbsoluteMoveCmdConveter.cs" />
@@ -74,13 +75,10 @@
     <Compile Include="CmdDrawer\HorizontalLineTo.cs" />
     <Compile Include="CmdDrawer\LineTo.cs" />
     <Compile Include="CmdDrawer\MoveTo.cs" />
-    <Compile Include="CmdDrawer\QuadraticBezierCurve.cs" />
-    <Compile Include="CmdDrawer\SmoothCurveTo.cs" />
-    <Compile Include="CmdDrawer\SmoothQuadraticBezierCurveTo.cs" />
     <Compile Include="InvalidCmdException.cs" />
     <Compile Include="CmdConverter\CmdConverter.cs" />
     <Compile Include="PathValidator.cs" />
-    <Compile Include="PathDrawer.cs" />
+    <Compile Include="CmdDrawer\PathDrawer.cs" />
     <Compile Include="CmdDrawer\VerticalLineTo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

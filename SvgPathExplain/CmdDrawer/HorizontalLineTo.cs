@@ -6,21 +6,9 @@ namespace SVGPathExplain.CommandProcess
 {
     public class HorizontalLineTo : ICmdDrawer
     {
-        public void Process(Cmd c, GraphicsPath g, ref float x, ref float y)
+        public void Process(Cmd command, GraphicsPath g)
         {
-            float xParam = c.Params[0];
-            // H
-            if (c.CmdText.ToUpper() == c.CmdText)
-            {
-                g.AddLine(new PointF(x, y), new PointF(xParam, y));
-                x = xParam;
-            }
-            // h
-            else
-            {
-                g.AddLine(new PointF(x, y), new PointF(x + xParam, y));
-                x += xParam;
-            }
+            g.AddLine(new PointF(command.X, command.Y), new PointF(command.Params[0], command.Y));
         }
     }
 }

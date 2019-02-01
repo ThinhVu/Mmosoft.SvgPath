@@ -44,7 +44,10 @@
                 case "a":
                     if (command.Params.Count % 7 != 0)
                         throw new InvalidCmdException($"{command.CmdText} required parameters number is multiples of 7!");
-                    break;                
+                    break;
+                case "Z":
+                case "z":
+                    break;
                 default:
                     throw new InvalidCmdException($"{command.CmdText} is invalid command");
             }

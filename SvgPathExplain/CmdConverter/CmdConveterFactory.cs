@@ -24,7 +24,10 @@ namespace SVGPathExplain.CmdConverter
             { "s", new RelativeSmoothCurveToCmdConverter() },                        
             { "q", new RelativeQuadraticBezierCurveCmdConverter() },            
             { "t", new RelativeSmoothQuadraticBezierCurveToCmdConverter() },           
-            { "a", new RelativeEllipticalArcConverter() },            
+            { "a", new RelativeEllipticalArcConverter() },
+            // 
+            { "Z", new ClosePathCmdConverter() },
+            { "z", new ClosePathCmdConverter() }
         };
 
         public static ICmdConverter Create(string cmd)

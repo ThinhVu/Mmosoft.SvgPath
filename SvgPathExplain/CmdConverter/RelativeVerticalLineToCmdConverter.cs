@@ -9,7 +9,12 @@ namespace SVGPathExplain.CmdConverter
     {
         public Cmd[] Convert(Cmd c, Cmd prevC, ref float absX, ref float absY)
         {
-            throw new NotImplementedException();
+            List<Cmd> cmds = new List<Cmd>();
+            Cmd cmd = new Cmd { CmdText = "V", X = absX, Y = absY };
+            cmd.Params.Add(absY + c.Params[0]);
+            absY += c.Params[0];
+            cmds.Add(cmd);
+            return cmds.ToArray();
         }
     }
 }

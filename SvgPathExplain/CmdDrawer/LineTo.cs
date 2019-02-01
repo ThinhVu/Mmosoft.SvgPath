@@ -7,30 +7,9 @@ namespace SVGPathExplain.CommandProcess
 {
     public class LineTo : ICmdDrawer
     {
-        public void Process(Cmd c, GraphicsPath g, ref float x, ref float y)
+        public void Process(Cmd command, GraphicsPath g)
         {
-            if (c.Params.Count % 2 != 0)
-                throw new Exception("Argument missing!");
-
-            bool isAbsolute = c.CmdText.ToUpper() == c.CmdText;
-
-            for (int i = 0; i < c.Params.Count; i += 2)
-            {
-                float xParam = c.Params[i];
-                float yParam = c.Params[i + 1];
-                g.AddLine(new PointF(x, y), new PointF(x + xParam, y + yParam));
-
-                if (isAbsolute)
-                {
-                    x = xParam;
-                    y = yParam;
-                }
-                else
-                {
-                    x += xParam;
-                    y += yParam;
-                }
-            }
+            g.AddLine(new PointF(command.X, command.Y), new PointF(command.Params[0], command.Params[1]));
         }
     }
 }

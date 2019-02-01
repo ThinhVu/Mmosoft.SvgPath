@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 using SVGPathExplain.CmdConverter;
 using SVGPathExplain.CommandProcess;
 
-namespace SVGPathExplain
+namespace SVGPathExplain.CmdDrawer
 {
     // ref: https://www.w3.org/TR/SVG/paths.html#PathDataLinetoCommands
     // ref: https://useiconic.com/open/
@@ -18,9 +18,14 @@ namespace SVGPathExplain
             ratio = 10;
         }   
 
-        private Bitmap Draw(string path, int width, int height)
+        public Bitmap Draw(string path, int width, int height)
         {
-            List<Cmd> cmds = CmdConverter.CmdConverter.Scale(CmdConverter.CmdConverter.NormalizeCommands(PathParser.Parse(path)), ratio);
+            var inputCmds = PathParser.Parse(path);
+            List<Cmd> cmds = 
+                //CmdConverter.CmdConverter.Scale(
+                CmdConverter.CmdConverter.NormalizeCommands(inputCmds)
+                //, ratio)
+                ;
             GraphicsPath gp = new GraphicsPath();
             for (int i = 0, cmdCount = cmds.Count; i < cmdCount; i++)
             {
