@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SVGPathExplain.CmdConverter
+namespace SVGPath.CmdConverter
 {
     class RelativeLineToCmdConverter : ICmdConverter
     {
@@ -12,7 +12,7 @@ namespace SVGPathExplain.CmdConverter
             List<Cmd> cmds = new List<Cmd>();
             for (int i = 0; i < c.Params.Count; i += 2)
             {
-                Cmd cmd = new Cmd { CmdText = "L", X = absX, Y = absY };
+                Cmd cmd = new Cmd { Text = "L", X = absX, Y = absY };
                 cmd.Params.Add(absX + c.Params[i]);
                 cmd.Params.Add(absY + c.Params[i+1]);
                 absX += c.Params[i];

@@ -1,7 +1,6 @@
-﻿using System.Drawing;
-using System.Drawing.Drawing2D;
+﻿using System.Drawing.Drawing2D;
 
-namespace SVGPathExplain.CommandProcess
+namespace SVGPath.CommandProcess
 {
     public class MoveTo : ICmdDrawer
     {
@@ -11,7 +10,7 @@ namespace SVGPathExplain.CommandProcess
         // will follow. If a moveto is followed by multiple pairs of coordinates, the subsequent
         // pairs are treated as implicit lineto commands. Hence, implicit lineto commands will
         // be relative if the moveto is relative, and absolute if the moveto is absolute.
-        public void Process(Cmd command, GraphicsPath g)
+        public void Process(Cmd c, GraphicsPath g)
         {
             // already processed in Converter
         }

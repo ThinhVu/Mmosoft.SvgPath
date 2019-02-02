@@ -2,13 +2,20 @@
 using System.Linq;
 using System.Text;
 
-namespace SVGPathExplain
+namespace SVGPath
 {
     public class PathParser
-    {        
+    {
+        private static readonly string[] AbsoluteCmdChars = new string[] {
+            "M", "L", "H", "V", "C", "S", "Q", "T", "A",  "Z"
+        };
+        private static readonly string[] RelativeCmdChars = new string[] {
+            "m", "l", "h", "v", "c", "s", "q", "t", "a", "z"
+        };
+
         private static bool TokenIsCommand(string token)
         {
-            return Cmd.AbsoluteCmdChars.Contains(token) || Cmd.RelativeCmdChars.Contains(token);
+            return AbsoluteCmdChars.Contains(token) || RelativeCmdChars.Contains(token);
         }
 
         private static List<string> Tokenize(string path)
@@ -66,12 +73,19 @@ namespace SVGPathExplain
                     i++;
                 }
                 // separate 2 positive number
-                else if (path[i] == ' ' || path[i] == ',')
+                else if (path[i] == ' ' || path[i] == ',' || path[i] == '\r' || path[i] == '\n')
                 {
-                    tokenize.Add(number.ToString());
-                    numAlreadyContainDot = false;
-                    number = new StringBuilder();
+                    if (!string.IsNullOrWhiteSpace(number.ToString()))
+                    {
+                        tokenize.Add(number.ToString());
+                        numAlreadyContainDot = false;
+                        number = new StringBuilder();
+                    }
                     i++;
+                }
+                else
+                {
+                    throw new InvalidSvgCharacterException($"{path[i]} is invalid svg path character!");
                 }
             }
 
@@ -92,7 +106,7 @@ namespace SVGPathExplain
                 if (TokenIsCommand(tokens[i]))
                 {
                     //
-                    command.CmdText = tokens[i];
+                    command.Text = tokens[i];
                     command.Params.Reverse();
                     //
                     commands.Add(command);

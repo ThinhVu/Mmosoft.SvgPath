@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SVGPathExplain.CmdConverter
+namespace SVGPath.CmdConverter
 {
     class AbsoluteSmoothCurveToCmdConverter : ICmdConverter
     {
@@ -13,20 +13,28 @@ namespace SVGPathExplain.CmdConverter
             Cmd cmd;
             for (int i = 0; i < c.Params.Count; i += 2)
             {
-                cmd = new Cmd { CmdText = "C", X = absX, Y = absY };
-                // control 1
-                if (prevC.CmdText == "C")
+                cmd = new Cmd { Text = "C", X = absX, Y = absY };
+                // control point 1
+                if (cmds.Count > 0)
+                {
+                    float controlPoint2PrevX = cmds[cmds.Count - 1].Params[2];
+                    float controlPoint2PrevY = cmds[cmds.Count - 1].Params[3];
+                    //
+                    cmd.Params.Add(2 * absX - controlPoint2PrevX);
+                    cmd.Params.Add(2 * absY - controlPoint2PrevY);
+                }
+                else if (prevC.Text == "C")
                 {
                     float prevSecondControlPointX = prevC.Params[2];
                     float prevSecondControlPointY = prevC.Params[3];
 
-                    c.Params.Add(absX * 2 - prevSecondControlPointX);
-                    c.Params.Add(absY * 2 - prevSecondControlPointY);
+                    cmd.Params.Add(absX * 2 - prevSecondControlPointX);
+                    cmd.Params.Add(absY * 2 - prevSecondControlPointY);
                 }
                 else
                 {
-                    c.Params.Add(absX);
-                    c.Params.Add(absY);
+                    cmd.Params.Add(absX);
+                    cmd.Params.Add(absY);
                 }
                 // control 2
                 cmd.Params.Add(c.Params[i]);

@@ -5,9 +5,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FA469914-A689-44E4-AB22-9E108617A3B8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>SVGPathExplain</RootNamespace>
-    <AssemblyName>SVGPathExplain</AssemblyName>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SVGPath</RootNamespace>
+    <AssemblyName>SVGPath</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SVGPathExplain.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,8 +55,8 @@
     <Compile Include="CmdConverter\AbsoluteSmoothQuadraticBezierCurveToCmdConverter.cs" />
     <Compile Include="CmdConverter\AbsoluteVerticalLineToCmdConverter.cs" />
     <Compile Include="CmdConverter\ClosePathCmdConverter.cs" />
-    <Compile Include="CmdConverter\CmdConveterFactory.cs" />
-    <Compile Include="CmdConverter\ICmdConverter.cs" />
+    <Compile Include="CmdConverter\_CmdConveterFactory.cs" />
+    <Compile Include="CmdConverter\_ICmdConverter.cs" />
     <Compile Include="CmdConverter\AbsoluteMoveCmdConveter.cs" />
     <Compile Include="CmdConverter\RelativeCurveToCmdConverter.cs" />
     <Compile Include="CmdConverter\RelativeEllipticalArcConverter.cs" />
@@ -67,8 +68,8 @@
     <Compile Include="CmdConverter\RelativeSmoothQuadraticBezierCurveToCmdConverter.cs" />
     <Compile Include="CmdConverter\RelativeVerticalLineToCmdConverter.cs" />
     <Compile Include="CmdDrawer\ClosePath.cs" />
-    <Compile Include="CmdDrawer\CmdDrawerFactory.cs" />
-    <Compile Include="CmdDrawer\ICmdDrawer.cs" />
+    <Compile Include="CmdDrawer\_CmdDrawerFactory.cs" />
+    <Compile Include="CmdDrawer\_ICmdDrawer.cs" />
     <Compile Include="Cmd.cs" />
     <Compile Include="CmdDrawer\CurveTo.cs" />
     <Compile Include="CmdDrawer\EllipticalArc.cs" />
@@ -76,11 +77,11 @@
     <Compile Include="CmdDrawer\LineTo.cs" />
     <Compile Include="CmdDrawer\MoveTo.cs" />
     <Compile Include="InvalidCmdException.cs" />
-    <Compile Include="CmdConverter\CmdConverter.cs" />
+    <Compile Include="CmdConverter\_CmdConverter.cs" />
+    <Compile Include="InvalidSvgCharacterException.cs" />
     <Compile Include="PathValidator.cs" />
-    <Compile Include="CmdDrawer\PathDrawer.cs" />
+    <Compile Include="CmdDrawer\_CmdDrawer.cs" />
     <Compile Include="CmdDrawer\VerticalLineTo.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PathParser.cs" />
   </ItemGroup>

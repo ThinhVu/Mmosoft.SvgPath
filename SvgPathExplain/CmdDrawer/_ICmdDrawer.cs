@@ -1,6 +1,6 @@
 ﻿using System.Drawing.Drawing2D;
 
-namespace SVGPathExplain.CommandProcess
+namespace SVGPath.CommandProcess
 {
     public interface ICmdDrawer
     {

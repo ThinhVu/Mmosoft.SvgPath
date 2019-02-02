@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace SVGPathExplain.CmdConverter
+namespace SVGPath.CmdConverter
 {
     public class AbsoluteCurveToCmdConveter : ICmdConverter
     {
@@ -11,7 +10,7 @@ namespace SVGPathExplain.CmdConverter
             Cmd cmd = null;
             for (int i = 0, paramCount = c.Params.Count; i < paramCount; i+=6)
             {
-                cmd = new Cmd { CmdText = "C", X = absX, Y = absY };
+                cmd = new Cmd { Text = "C", X = absX, Y = absY };
                 cmd.Params.Add(c.Params[i]);
                 cmd.Params.Add(c.Params[i+1]);
                 cmd.Params.Add(c.Params[i+2]);

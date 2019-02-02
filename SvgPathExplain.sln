@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVGPathExplain", "SvgPathExplain\SVGPathExplain.csproj", "{FA469914-A689-44E4-AB22-9E108617A3B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVGPath", "SvgPathExplain\SVGPath.csproj", "{FA469914-A689-44E4-AB22-9E108617A3B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{629A37EA-CDF6-4230-9D82-06456340C341}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FA469914-A689-44E4-AB22-9E108617A3B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA469914-A689-44E4-AB22-9E108617A3B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA469914-A689-44E4-AB22-9E108617A3B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{629A37EA-CDF6-4230-9D82-06456340C341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{629A37EA-CDF6-4230-9D82-06456340C341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{629A37EA-CDF6-4230-9D82-06456340C341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{629A37EA-CDF6-4230-9D82-06456340C341}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

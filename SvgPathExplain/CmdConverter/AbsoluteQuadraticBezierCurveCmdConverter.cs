@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SVGPathExplain.CmdConverter
+namespace SVGPath.CmdConverter
 {
     class AbsoluteQuadraticBezierCurveCmdConverter : ICmdConverter
     {
@@ -13,7 +13,7 @@ namespace SVGPathExplain.CmdConverter
             Cmd cmd;
             for (int i = 0; i < c.Params.Count; i += 4)
             {
-                cmd = new Cmd { CmdText = "C", X = absX, Y = absY };
+                cmd = new Cmd { Text = "C", X = absX, Y = absY };
                 // control point 1
                 cmd.Params.Add(c.Params[i]);
                 cmd.Params.Add(c.Params[i+1]);

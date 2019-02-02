@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SVGPathExplain.CommandProcess
+﻿namespace SVGPath.CommandProcess
 {
     public static class CmdDrawerFactory
     {

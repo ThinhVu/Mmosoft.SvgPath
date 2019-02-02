@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SVGPathExplain.CmdConverter
+namespace SVGPath.CmdConverter
 {
     public static class CmdConverter
     {
@@ -25,8 +25,8 @@ namespace SVGPathExplain.CmdConverter
             {
                 curCmd = cmds[i];
                 prevCmd = absCommands.Count > 0? absCommands[absCommands.Count - 1] : null;
-                PathValidator.Validate(cmds[i]);
-                absCommands.AddRange(CmdConveterFactory.Create(curCmd.CmdText).Convert(curCmd, prevCmd, ref absX, ref absY));                
+                PathValidator.Validate(cmds[i], i);
+                absCommands.AddRange(CmdConveterFactory.Create(curCmd.Text).Convert(curCmd, prevCmd, ref absX, ref absY));                
             }
 
             return absCommands;
@@ -46,7 +46,7 @@ namespace SVGPathExplain.CmdConverter
             {
                 cmd = new Cmd
                 {
-                    CmdText = commands[i].CmdText,
+                    Text = commands[i].Text,
                     X = commands[i].X * ratio,
                     Y = commands[i].Y * ratio
                 };

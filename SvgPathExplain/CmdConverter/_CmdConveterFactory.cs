@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SVGPathExplain.CmdConverter
+namespace SVGPath.CmdConverter
 {
     public static class CmdConveterFactory
     {
