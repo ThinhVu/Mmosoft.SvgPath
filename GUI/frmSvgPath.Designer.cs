@@ -37,6 +37,7 @@
             this.lbShape = new System.Windows.Forms.ListBox();
             this.lblError = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             this.textBox1.Location = new System.Drawing.Point(169, 32);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(432, 82);
+            this.textBox1.Size = new System.Drawing.Size(431, 84);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -53,7 +54,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(607, 32);
+            this.pictureBox1.Location = new System.Drawing.Point(606, 33);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(83, 83);
             this.pictureBox1.TabIndex = 2;
@@ -62,9 +63,9 @@
             // lbParsedCmds
             // 
             this.lbParsedCmds.FormattingEnabled = true;
-            this.lbParsedCmds.Location = new System.Drawing.Point(169, 135);
+            this.lbParsedCmds.Location = new System.Drawing.Point(169, 149);
             this.lbParsedCmds.Name = "lbParsedCmds";
-            this.lbParsedCmds.Size = new System.Drawing.Size(520, 251);
+            this.lbParsedCmds.Size = new System.Drawing.Size(520, 316);
             this.lbParsedCmds.TabIndex = 4;
             // 
             // label1
@@ -79,7 +80,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(166, 117);
+            this.label2.Location = new System.Drawing.Point(168, 124);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 13);
             this.label2.TabIndex = 6;
@@ -99,7 +100,7 @@
             this.lbShape.FormattingEnabled = true;
             this.lbShape.Location = new System.Drawing.Point(12, 32);
             this.lbShape.Name = "lbShape";
-            this.lbShape.Size = new System.Drawing.Size(146, 355);
+            this.lbShape.Size = new System.Drawing.Size(146, 459);
             this.lbShape.TabIndex = 8;
             this.lbShape.SelectedIndexChanged += new System.EventHandler(this.lbShape_SelectedIndexChanged);
             // 
@@ -114,18 +115,29 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(604, 13);
+            this.label5.Location = new System.Drawing.Point(603, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 12;
             this.label5.Text = "Result";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(467, 478);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(222, 13);
+            this.linkLabel1.TabIndex = 14;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "https://github.com/ThinhVu/svg-path-explain";
             // 
             // frmSvgPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(714, 394);
+            this.ClientSize = new System.Drawing.Size(695, 501);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.label4);
@@ -157,6 +169,7 @@
         private System.Windows.Forms.ListBox lbShape;
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

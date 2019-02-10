@@ -1,8 +1,19 @@
-﻿namespace SVGPath
+﻿using System.Collections.Generic;
+
+namespace SVGPath
 {
-    public static class PathValidator
+    public static class CmdValidator
     {
-        public static void Validate(Cmd command, int index)
+        // Validate command
+        public static void ValidateCmds(List<Cmd> cmds)
+        {
+            for (int i = 0; i < cmds.Count; i++)
+            {
+                Validate(cmds[i], i);
+            }
+        }
+
+        private static void Validate(Cmd command, int index)
         {
             if (command == null)
                 throw new System.ArgumentNullException($"command {index} is null");

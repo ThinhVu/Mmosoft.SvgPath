@@ -76,14 +76,15 @@
     <Compile Include="CmdDrawer\HorizontalLineTo.cs" />
     <Compile Include="CmdDrawer\LineTo.cs" />
     <Compile Include="CmdDrawer\MoveTo.cs" />
+    <Compile Include="CmdScaler.cs" />
     <Compile Include="InvalidCmdException.cs" />
     <Compile Include="CmdConverter\_CmdConverter.cs" />
     <Compile Include="InvalidSvgCharacterException.cs" />
-    <Compile Include="PathValidator.cs" />
+    <Compile Include="CmdValidator.cs" />
     <Compile Include="CmdDrawer\_CmdDrawer.cs" />
     <Compile Include="CmdDrawer\VerticalLineTo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PathParser.cs" />
+    <Compile Include="CmdParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

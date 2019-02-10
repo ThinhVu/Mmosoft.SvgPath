@@ -5,7 +5,8 @@ using System.Drawing.Drawing2D;
 namespace SVGPath.CommandProcess
 {
     public class EllipticalArc : ICmdDrawer
-    {               
+    {
+        // See the original implementation at: https://github.com/vvvv/SVG
         public void Process(Cmd c, GraphicsPath g)
         {
             // rx ry x-axis-rotation large-arc-flag sweep-flag x y

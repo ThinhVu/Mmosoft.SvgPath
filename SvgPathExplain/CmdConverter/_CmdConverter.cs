@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SVGPath.CmdConverter
+namespace SVGPath
 {
     public static class CmdConverter
     {
@@ -12,7 +12,7 @@ namespace SVGPath.CmdConverter
         /// </summary>
         /// <param name="cmds">New command collection object</param>
         /// <returns></returns>
-        public static List<Cmd> NormalizeCommands(List<Cmd> cmds)
+        public static List<Cmd> ExtractToSingleAndAbsolutePositionCmds(List<Cmd> cmds)
         {
             float absX = 0f;
             float absY = 0f;
@@ -24,42 +24,11 @@ namespace SVGPath.CmdConverter
             for (int i = 0, cmdCount = cmds.Count; i < cmdCount; i++)
             {
                 curCmd = cmds[i];
-                prevCmd = absCommands.Count > 0? absCommands[absCommands.Count - 1] : null;
-                PathValidator.Validate(cmds[i], i);
+                prevCmd = absCommands.Count > 0? absCommands[absCommands.Count - 1] : null;                
                 absCommands.AddRange(CmdConveterFactory.Create(curCmd.Text).Convert(curCmd, prevCmd, ref absX, ref absY));                
             }
 
             return absCommands;
-        }
-
-        /// <summary>
-        /// Create new command collection which have position value = value * ratio
-        /// </summary>
-        /// <param name="commands"></param>
-        /// <param name="ratio"></param>
-        /// <returns></returns>
-        public static List<Cmd> Scale(List<Cmd> commands, float ratio)
-        {
-            List<Cmd> cmds = new List<Cmd>(commands.Count);        
-            Cmd cmd;
-            for (int i = 0, cmdCount = commands.Count; i < cmdCount; i++)
-            {
-                cmd = new Cmd
-                {
-                    Text = commands[i].Text,
-                    X = commands[i].X * ratio,
-                    Y = commands[i].Y * ratio
-                };
-                cmd.Params.AddRange(commands[i].Params);
-
-                for (int j = 0, cmdParamCount = cmd.Params.Count; j < cmdParamCount; j++)
-                {
-                    cmd.Params[j] *= ratio;
-                }
-
-                cmds.Add(cmd);
-            }
-            return cmds;
         }
     }
 }

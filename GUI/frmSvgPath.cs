@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -7,12 +9,10 @@ using System.Windows.Forms;
 using SVGPath;
 using SVGPath.CmdDrawer;
 
-
 namespace GUI
 {
     public partial class frmSvgPath : Form
-    {
-        CmdDrawer pathDrawer = new CmdDrawer();
+    {        
         Regex pathRegexer = new Regex("d=\"(.*?)\"");
         private string[] fileNames;
 
@@ -25,10 +25,11 @@ namespace GUI
         {
             try
             {
-                var cmds = SVGPath.PathParser.Parse(textBox1.Text);
+                List<Cmd> cmds = CmdParser.Parse(textBox1.Text);
                 lbParsedCmds.Items.Clear();
                 lbParsedCmds.Items.AddRange(cmds.Select(i => i.ToString()).ToArray());
-                pictureBox1.Image = pathDrawer.Draw(textBox1.Text, 8, 8);
+                List<Cmd> processedCmds = CmdScaler.Scale(CmdConverter.ExtractToSingleAndAbsolutePositionCmds(cmds), 10);                                
+                pictureBox1.Image = CmdDrawer.Draw(processedCmds, 81, 81, Brushes.Black);
                 lblError.Text = string.Empty;
             }
             catch (InvalidSvgCharacterException isce)

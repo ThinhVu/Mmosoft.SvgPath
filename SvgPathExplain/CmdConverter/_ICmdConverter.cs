@@ -1,4 +1,4 @@
-﻿namespace SVGPath.CmdConverter
+﻿namespace SVGPath
 {
     public interface ICmdConverter
     {

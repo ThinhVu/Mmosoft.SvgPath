@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SVGPath
 {
-    public class PathParser
+    public class CmdParser
     {
         private static readonly string[] AbsoluteCmdChars = new string[] {
             "M", "L", "H", "V", "C", "S", "Q", "T", "A",  "Z"
