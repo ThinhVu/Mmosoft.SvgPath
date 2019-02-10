@@ -17,8 +17,8 @@ namespace SVGPath.CmdConverter
                 cmd.Params.Add(c.Params[i + 2]);
                 cmd.Params.Add(c.Params[i + 3]);
                 cmd.Params.Add(c.Params[i + 4]);
-                cmd.Params.Add(c.Params[i + 5]);
-                cmd.Params.Add(c.Params[i + 6]);
+                cmd.Params.Add(absX + c.Params[i + 5]);
+                cmd.Params.Add(absY + c.Params[i + 6]);
                 //
                 absX += c.Params[i + 5];
                 absY += c.Params[i + 6];
