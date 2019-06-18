@@ -20,7 +20,7 @@ namespace SVGPath
 
         public override string ToString()
         {
-            return $"{Text} {string.Join(" ", Params.ToArray())}";
+            return string.Format("{0} {1}", Text, string.Join(" ", Params.ToArray()));
         }
     }
 }

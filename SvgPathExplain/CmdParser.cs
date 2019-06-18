@@ -85,7 +85,7 @@ namespace SVGPath
                 }
                 else
                 {
-                    throw new InvalidSvgCharacterException($"{path[i]} is invalid svg path character!");
+                    throw new InvalidSvgCharacterException(string.Format("{0} is invalid svg path character!", path[i]));
                 }
             }
 

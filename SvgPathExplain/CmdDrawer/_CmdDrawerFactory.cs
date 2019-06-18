@@ -21,7 +21,7 @@
                 case "Z":
                     return new ClosePath();
                 default:
-                    throw new InvalidCmdException($"Command {cmd} are not supported!");
+                    throw new InvalidCmdException(string.Format("Command {0} are not supported!", cmd));
             }                
         }
     }
