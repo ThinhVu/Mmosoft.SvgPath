@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExColorTranslator.cs" />
     <Compile Include="frmSvgPath.cs">
       <SubType>Form</SubType>
     </Compile>

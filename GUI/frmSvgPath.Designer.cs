@@ -45,6 +45,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbColor = new System.Windows.Forms.ComboBox();
+            this.txtParsedCmds = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBase)).BeginInit();
@@ -59,7 +63,7 @@
             this.txtSVGPath.Location = new System.Drawing.Point(6, 38);
             this.txtSVGPath.Multiline = true;
             this.txtSVGPath.Name = "txtSVGPath";
-            this.txtSVGPath.Size = new System.Drawing.Size(403, 87);
+            this.txtSVGPath.Size = new System.Drawing.Size(629, 87);
             this.txtSVGPath.TabIndex = 0;
             this.txtSVGPath.TextChanged += new System.EventHandler(this.txtSVGPath_TextChanged);
             // 
@@ -75,12 +79,13 @@
             // 
             // lbParsedCmds
             // 
-            this.lbParsedCmds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbParsedCmds.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbParsedCmds.FormattingEnabled = true;
             this.lbParsedCmds.Location = new System.Drawing.Point(3, 16);
             this.lbParsedCmds.Name = "lbParsedCmds";
-            this.lbParsedCmds.Size = new System.Drawing.Size(512, 291);
+            this.lbParsedCmds.Size = new System.Drawing.Size(738, 212);
             this.lbParsedCmds.TabIndex = 4;
+            this.lbParsedCmds.SelectedIndexChanged += new System.EventHandler(this.lbParsedCmds_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -103,16 +108,16 @@
             // 
             // lblError
             // 
-            this.lblError.AutoSize = true;
-            this.lblError.Location = new System.Drawing.Point(168, 16);
+            this.lblError.Location = new System.Drawing.Point(278, 470);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(0, 13);
+            this.lblError.Size = new System.Drawing.Size(632, 25);
             this.lblError.TabIndex = 11;
+            this.lblError.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(463, 470);
+            this.linkLabel1.Location = new System.Drawing.Point(6, 485);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(225, 13);
             this.linkLabel1.TabIndex = 14;
@@ -131,7 +136,7 @@
             // 
             // nudScale
             // 
-            this.nudScale.Location = new System.Drawing.Point(281, 12);
+            this.nudScale.Location = new System.Drawing.Point(507, 11);
             this.nudScale.Minimum = new decimal(new int[] {
             1,
             0,
@@ -141,7 +146,7 @@
             this.nudScale.Size = new System.Drawing.Size(42, 20);
             this.nudScale.TabIndex = 16;
             this.nudScale.Value = new decimal(new int[] {
-            1,
+            10,
             0,
             0,
             0});
@@ -150,7 +155,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(241, 15);
+            this.label3.Location = new System.Drawing.Point(467, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 17;
@@ -158,7 +163,7 @@
             // 
             // nudBase
             // 
-            this.nudBase.Location = new System.Drawing.Point(367, 13);
+            this.nudBase.Location = new System.Drawing.Point(593, 12);
             this.nudBase.Name = "nudBase";
             this.nudBase.Size = new System.Drawing.Size(42, 20);
             this.nudBase.TabIndex = 18;
@@ -172,7 +177,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(333, 15);
+            this.label6.Location = new System.Drawing.Point(559, 14);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 19;
@@ -181,7 +186,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(12, 470);
+            this.linkLabel2.Location = new System.Drawing.Point(6, 469);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(140, 13);
             this.linkLabel2.TabIndex = 20;
@@ -190,19 +195,21 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.txtParsedCmds);
             this.groupBox1.Controls.Add(this.lbParsedCmds);
             this.groupBox1.Location = new System.Drawing.Point(171, 153);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(518, 310);
+            this.groupBox1.Size = new System.Drawing.Size(744, 310);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Commands";
+            this.groupBox1.Text = "Commands (select each step to see what happen)";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.pbPreview);
             this.groupBox2.Controls.Add(this.btnSave);
-            this.groupBox2.Location = new System.Drawing.Point(595, 16);
+            this.groupBox2.Location = new System.Drawing.Point(821, 16);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(94, 131);
             this.groupBox2.TabIndex = 22;
@@ -211,6 +218,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cbColor);
+            this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.txtSVGPath);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.nudScale);
@@ -219,7 +228,7 @@
             this.groupBox3.Controls.Add(this.nudBase);
             this.groupBox3.Location = new System.Drawing.Point(174, 16);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(415, 131);
+            this.groupBox3.Size = new System.Drawing.Size(641, 131);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
@@ -234,12 +243,52 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Samples";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(185, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(151, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Color (A,R,G,B) or Hex Format:";
+            // 
+            // cbColor
+            // 
+            this.cbColor.FormattingEnabled = true;
+            this.cbColor.Items.AddRange(new object[] {
+            "255, 255, 0, 0",
+            "#FFFF0000"});
+            this.cbColor.Location = new System.Drawing.Point(340, 10);
+            this.cbColor.Name = "cbColor";
+            this.cbColor.Size = new System.Drawing.Size(121, 21);
+            this.cbColor.TabIndex = 22;
+            this.cbColor.SelectedIndexChanged += new System.EventHandler(this.cbColor_SelectedIndexChanged);
+            this.cbColor.TextChanged += new System.EventHandler(this.cbColor_TextChanged);
+            // 
+            // txtParsedCmds
+            // 
+            this.txtParsedCmds.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtParsedCmds.Location = new System.Drawing.Point(3, 247);
+            this.txtParsedCmds.Multiline = true;
+            this.txtParsedCmds.Name = "txtParsedCmds";
+            this.txtParsedCmds.Size = new System.Drawing.Size(738, 60);
+            this.txtParsedCmds.TabIndex = 23;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 231);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(362, 13);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Absolute commands (sometimes it contain exponent => cannot use to draw)";
+            // 
             // frmSvgPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(695, 501);
+            this.ClientSize = new System.Drawing.Size(927, 504);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -256,6 +305,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudScale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBase)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -284,6 +334,10 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbColor;
+        private System.Windows.Forms.TextBox txtParsedCmds;
+        private System.Windows.Forms.Label label4;
     }
 }
 

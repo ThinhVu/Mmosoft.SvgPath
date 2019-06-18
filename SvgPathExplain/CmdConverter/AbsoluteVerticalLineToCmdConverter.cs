@@ -12,7 +12,7 @@ namespace SVGPath
             List<Cmd> cmds = new List<Cmd>();
             Cmd cmd = new Cmd { Text = "V", X = absX, Y = absY };
             cmd.Params.Add(c.Params[0]);
-            absX = c.Params[0];
+            absY = c.Params[0];
             cmds.Add(cmd);
             return cmds.ToArray();
         }
