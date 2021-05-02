@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>SVGPath.dll</id>
+    <version>1.0.0</version>
+    <authors>Thinh Vu</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/ThinhVu/Mmosoft.SvgPath</projectUrl>
+    <description>A library which create customizable image, icon from svg path in runtime</description>
+    <releaseNotes>Initial version.</releaseNotes>
+    <copyright>ThinhVu/Mmosoft</copyright>
+    <tags>Svgpath WindowsForm</tags>
+    <dependencies>
+	<group targetFramework="net40" />
+    </dependencies>
+  </metadata>
+</package>
